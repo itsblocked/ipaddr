@@ -19,7 +19,7 @@ func (ip *IpAddr) String() string {
 // Set assigns value to ip if it validates.
 func (ip *IpAddr) Set(value string) error {
 	parts := strings.Split(value, ":")
-	if len(parts) != 2 {
+	if len(parts) != 2 || len(parts[1]) == 0 {
 		return fmt.Errorf("port # is required")
 	}
 
