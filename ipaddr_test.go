@@ -26,4 +26,26 @@ func TestIpAddrSet(t *testing.T) {
 	}
 }
 
+func TestIpAddrPort(t *testing.T) {
+	cases := map[string]string{
+		"127.0.0.1:4040":  "4040",
+		"10.1.10.1:9000":  "9000",
+		"127.0.0.1:55555": "55555",
+		"127.0.0.1:9":     "9",
+	}
+
+	for s, want := range cases {
+		var ip IpAddr
+		err := ip.Set(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		p := ip.Port()
+		if p != want {
+			t.Errorf("got: %s, want %s", p, want)
+		}
+	}
+}
+
 // vim: sw=8 sts=8 noet
