@@ -43,4 +43,16 @@ func (ip *IpAddr) Set(value string) error {
 	return nil
 }
 
+// Port returns the port portion of IpAddr or empty string if port is not found.
+func (ip *IpAddr) Port() string {
+	parts := strings.Split(string(*ip), ":")
+	if len(parts) != 2 || len(parts[1]) == 0 {
+		return ""
+	}
+	if _, err := strconv.Atoi(parts[1]); err != nil {
+		return ""
+	}
+	return parts[1]
+}
+
 // vim: sw=8 sts=8 noet
